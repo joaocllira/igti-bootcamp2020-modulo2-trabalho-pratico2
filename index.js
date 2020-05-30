@@ -75,8 +75,99 @@ const findStatesWithLessCities = () => {
     console.log(printStates);
 }
 
+const findCityWithLargestNameByState = (state) => {
+    const cityData = fs.readFileSync(`./db/Cidades.json`);    
+    const cities = JSON.parse(cityData.toString());
+
+    const stateCities = cities.filter(city => city.Estado === state.ID).map(city => city.Nome);
+    const sortedCities = stateCities.sort((a, b) => {
+        if (a.length > b.length) return 1;
+        if (a.length < b.length) return -1;
+        return 0;
+    }).reverse();
+
+    return sortedCities[0];
+}
+
+const findCityWithSmallestNameByState = (state) => {
+    const cityData = fs.readFileSync(`./db/Cidades.json`);    
+    const cities = JSON.parse(cityData.toString());
+
+    const stateCities = cities.filter(city => city.Estado === state.ID).map(city => city.Nome);
+    const sortedCities = stateCities.sort((a, b) => {
+        if (a.length > b.length) return 1;
+        if (a.length < b.length) return -1;
+        return 0;
+    });
+
+    return sortedCities[0];
+}
+
+const findAllCitiesWithLargestName = () => {
+    const stateData = fs.readFileSync(`./db/Estados.json`);    
+    const states = JSON.parse(stateData.toString());
+
+    const largestNamesCities = states.map(state => `${findCityWithLargestNameByState(state)} - ${state.Sigla}`);
+    
+    console.log(largestNamesCities);
+}
+
+const findAllCitiesWithSmallestName = () => {
+    const stateData = fs.readFileSync(`./db/Estados.json`);    
+    const states = JSON.parse(stateData.toString());
+
+    const largestNamesCities = states.map(state => `${findCityWithSmallestNameByState(state)} - ${state.Sigla}`);
+    
+    console.log(largestNamesCities);
+}
+
+const findLargestNameCity = () => {
+    const stateData = fs.readFileSync(`./db/Estados.json`);    
+    const states = JSON.parse(stateData.toString());
+
+    const largestNamesCities = states.map(state => `${findCityWithLargestNameByState(state)} - ${state.Sigla}`);
+    
+    const largestNameCity = largestNamesCities.sort().sort((a, b) => {
+        if (a.length > b.length) return -1;
+        if (a.length < b.length) return 1;
+        return 0;
+    })[0];
+
+    console.log(largestNameCity);
+}
+
+const findSmallestNameCity = () => {
+    const stateData = fs.readFileSync(`./db/Estados.json`);    
+    const states = JSON.parse(stateData.toString());
+
+    const smallestNamesCities = states.map(state => `${findCityWithSmallestNameByState(state)} - ${state.Sigla}`);
+    
+    const smallestNameCity = smallestNamesCities.sort().sort((a, b) => {
+        if (a.length > b.length) return 1;
+        if (a.length < b.length) return -1;
+        return 0;
+    })[0];
+
+    console.log(smallestNameCity);
+}
+
 /******************* EXECUCAO *********************/
 // createAllStateFiles();
 // console.log(countNumberOfCities('PB'))
-// findStatesWithMoreCities();
+console.log('\n**************************** Estados com mais cidades ******************************');
+findStatesWithMoreCities();
+
+console.log('\n**************************** Estados com menos cidades ******************************');
 findStatesWithLessCities();
+
+console.log('\n**************************** Cidades com maior nome divididas por estado ******************************');
+findAllCitiesWithLargestName();
+
+console.log('\n**************************** Cidade com maior nome de todos os estados ******************************');
+findLargestNameCity();
+
+console.log('\n**************************** Cidades com menor nome divididas por estado ******************************');
+findAllCitiesWithSmallestName();
+
+console.log('\n**************************** Cidade com menor nome de todos os estados ******************************');
+findSmallestNameCity();
