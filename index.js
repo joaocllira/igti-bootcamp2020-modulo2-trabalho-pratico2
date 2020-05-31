@@ -58,8 +58,13 @@ const findStatesWithMoreCities = () => {
         if (a.count < b.count) return 1
         return 0;
     });
+    /**** PROFESSOR FDP BEGIN *****/
+    const statesWithMore = sortedStates.splice(0, 5);
+    const sum = statesWithMore.reduce((acc, state) => acc + state.count, 0);
+    /**** PROFESSOR FDP END *****/
     const printStates = sortedStates.splice(0, 5).map(state => `${state.uf} - ${state.count}`);
     console.log(printStates);
+    console.log(`Quantidade Total de cidades dos estados com mais cidades = ${sum}`);
 }
 
 const findStatesWithLessCities = () => {
@@ -71,8 +76,13 @@ const findStatesWithLessCities = () => {
         if (a.count < b.count) return -1
         return 0;
     });
+    /**** PROFESSOR FDP BEGIN *****/
+    const statesWithLess = sortedStates.splice(0, 5);
+    const sum = statesWithLess.reduce((acc, state) => acc + state.count, 0);
+    /**** PROFESSOR FDP END *****/
     const printStates = sortedStates.splice(0, 5).map(state => `${state.uf} - ${state.count}`);
     console.log(printStates);
+    console.log(`Quantidade total de cidades dos estados com menos cidades = ${sum}`);
 }
 
 const findCityWithLargestNameByState = (state) => {
@@ -154,6 +164,7 @@ const findSmallestNameCity = () => {
 /******************* EXECUCAO *********************/
 // createAllStateFiles();
 // console.log(countNumberOfCities('PB'))
+
 console.log('\n**************************** Estados com mais cidades ******************************');
 findStatesWithMoreCities();
 
