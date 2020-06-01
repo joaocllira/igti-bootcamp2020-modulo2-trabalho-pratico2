@@ -59,7 +59,8 @@ const findStatesWithMoreCities = () => {
         return 0;
     });
     /**** PROFESSOR FDP BEGIN *****/
-    const statesWithMore = sortedStates.splice(0, 5);
+    const sortedStatesCopy = [ ...sortedStates ];
+    const statesWithMore = sortedStatesCopy.splice(0, 5);
     const sum = statesWithMore.reduce((acc, state) => acc + state.count, 0);
     /**** PROFESSOR FDP END *****/
     const printStates = sortedStates.splice(0, 5).map(state => `${state.uf} - ${state.count}`);
@@ -77,7 +78,8 @@ const findStatesWithLessCities = () => {
         return 0;
     });
     /**** PROFESSOR FDP BEGIN *****/
-    const statesWithLess = sortedStates.splice(0, 5);
+    const sortedStatesCopy = [ ...sortedStates ];
+    const statesWithLess = sortedStatesCopy.splice(0, 5);
     const sum = statesWithLess.reduce((acc, state) => acc + state.count, 0);
     /**** PROFESSOR FDP END *****/
     const printStates = sortedStates.splice(0, 5).map(state => `${state.uf} - ${state.count}`);
