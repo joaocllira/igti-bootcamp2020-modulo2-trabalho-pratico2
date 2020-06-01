@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// Cria os arquivos por estado
 const createAllStateFiles = () => {
     fs.readFile('./db/Estados.json', (err, data) => {
         if (err) {
